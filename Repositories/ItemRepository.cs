@@ -3,20 +3,22 @@ using Siemens.Internship2026.GradeBook.Models;
 
 namespace Siemens.Internship2026.GradeBook.Repositories;
 
-public class ItemRepository : IItemReader
+public class ItemRepository : IItemRepository
 {
     protected readonly List<Item> _items = new();
     protected int _nextId = 1;
 
     public virtual Task<Item?> GetByIdAsync(int id)
     {
-        var item = _items.FirstOrDefault(i => i.Id == id && i.IsActive);
+        // Removed business logic (IsActive filter).
+        var item = _items.FirstOrDefault(i => i.Id == id);
         return Task.FromResult(item);
     }
 
     public virtual Task<IEnumerable<Item>> GetAllAsync()
     {
-        var items = _items.Where(i => i.IsActive).AsEnumerable();
+        // Removed business logic (IsActive filter).
+        var items = _items.AsEnumerable();
         return Task.FromResult(items);
     }
 }
