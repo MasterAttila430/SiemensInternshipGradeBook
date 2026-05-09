@@ -6,8 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-// Registering the repository with the new interface name
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddHttpClient<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IGradeService, GradeService>();
 
 var app = builder.Build();
